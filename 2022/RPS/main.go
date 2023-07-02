@@ -65,6 +65,7 @@ func getWinner(player1, player2 string) string {
 }
 
 func getScore(a, b string) int{
+	b = getMove(a, b)
 	fmt.Println("Player 1: ", a , "Player 2: ", b)
 	score := 0
 	switch b {
@@ -87,3 +88,36 @@ func getScore(a, b string) int{
 	return score
 }
 
+
+func getMove(p1, p2 string)string {
+	switch p1 {
+	case "A":
+		switch p2 {
+			case "X":
+				return "Z"
+			case "Y":
+				return "X"
+			case "Z":
+				return "Y"
+		}
+	case "B":
+		switch p2 {
+			case "X":
+				return "X"
+			case "Y":
+				return "Y"
+			case "Z":
+				return "Z"
+		}
+	case "C":
+		switch p2 {
+			case "X":
+				return "Y"
+			case "Y":
+				return "Z"
+			case "Z":
+				return "X"
+		}
+}
+return "error"
+}
