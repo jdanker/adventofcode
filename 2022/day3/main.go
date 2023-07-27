@@ -29,11 +29,9 @@ func main() {
 		half := len(line) / 2
 		left := line[:half]
 		right := line[half:]
-
-
-
-
-
+		common := compareString(left, right)
+		fmt.Printf("%c\n", common)
+		
 		
 	}
 
@@ -45,5 +43,22 @@ func getPriority(r rune) int {
 }
 
 func compareString(s1, s2 string) rune {
-	return 'a'
+	s1Chars := make(map[rune]bool)
+	s2Chars := make(map[rune]bool)
+
+	// add the characters of each string to a map
+	for _, c := range s1 {
+		s1Chars[c] = true
+	}
+	for _, c := range s2 {
+		s2Chars[c] = true
+	}
+	// compare the maps to find the first character that is in both strings
+	for c := range s1Chars {
+		if s2Chars[c] {
+			return c
+		}
+	}
+
+	return 0
 }
