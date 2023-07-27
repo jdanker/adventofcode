@@ -8,6 +8,7 @@ import (
 
 func main() {
 	readFile, err := os.Open("input.txt")
+	prioritySum := 0
 
 	if err != nil {
 		fmt.Println(err)
@@ -31,14 +32,26 @@ func main() {
 		right := line[half:]
 		common := compareString(left, right)
 		fmt.Printf("%c\n", common)
-		
+
+		priority := getPriority(common)
+		if(priority != 0){
+			prioritySum += priority
+		}
+
+
 		
 	}
+	println(prioritySum)
 
 
 }
 
 func getPriority(r rune) int {
+	if r>='a' && r<='z' {
+		return int(r-96)
+	} else if r>='A' && r<='Z' {
+		return int(r-38)
+	}
 	return 0
 }
 
