@@ -16,6 +16,9 @@ func main() {
 
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
+	
+	// slice to hold three lines read from the file
+	lastThreeLines := make([]string, 3)
 
 	for fileScanner.Scan() {
 		line := fileScanner.Text()
@@ -26,6 +29,16 @@ func main() {
 			return
 			
 		}
+		
+		// removes the slice if there are 3 lines, adds line to the slice if not
+		if len(lastThreeLines) == 3 {
+			lastThreeLines = lastThreeLines[:0]
+		} else if len(lastThreeLines) < 3 {
+			lastThreeLines = append(lastThreeLines, line)
+		} 
+
+
+
 
 		half := len(line) / 2
 		left := line[:half]
@@ -46,6 +59,7 @@ func main() {
 
 }
 
+// subtracts unicode value -1 from the character to get the priority
 func getPriority(r rune) int {
 	if r>='a' && r<='z' {
 		return int(r-96)
@@ -73,5 +87,11 @@ func compareString(s1, s2 string) rune {
 		}
 	}
 
+	return 0
+}
+
+func getBadge(lastThree []string) int {
+	
+	// TODO: compare 3 strings to find the common character
 	return 0
 }
